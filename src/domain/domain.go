@@ -20,21 +20,21 @@ type OrderRepository interface {
 }
 
 type Customer struct {
-	Id int
+	Id   int
 	Name string
 }
 
 type Item struct {
-	Id int
-	Name string
-	Value float64
+	Id        int
+	Name      string
+	Value     float64
 	Available bool
 }
 
 type Order struct {
-	Id int
+	Id       int
 	Customer Customer
-	Items []Item
+	Items    []Item
 }
 
 func (order *Order) Add(item Item) error {
@@ -42,9 +42,8 @@ func (order *Order) Add(item Item) error {
 		return errors.New("cannot add unavailable items to order")
 	}
 
-	if order.value() + item.Value > 250.00 {
-		return errors.New("An order may not exceed
-		a total value of $250.00")
+	if order.value()+item.Value > 250.00 {
+		return errors.New("an order may not exceed a total value of $250.00")
 	}
 	order.Items = append(order.Items, item)
 	return nil
